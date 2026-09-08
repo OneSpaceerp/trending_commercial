@@ -16,6 +16,11 @@
       "reqd": 1
     },
     {
+      "fieldname": "brief_interactive_html",
+      "fieldtype": "HTML",
+      "label": "Request Brief Wizard"
+    },
+    {
       "fieldname": "title",
       "fieldtype": "Data",
       "label": "Request Title",

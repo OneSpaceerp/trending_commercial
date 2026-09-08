@@ -1,10 +1,212 @@
 :root {
   --trending-brand: #BFF747;
+  --trending-brand-hover: #aaf030;
+  --trending-brand-light: #f4fee7;
   --trending-dark: #0F172A;
+  --trending-gray-bg: #F8FAFC;
+  --trending-border: #E2E8F0;
+  --trending-text: #1E293B;
+  --trending-muted: #64748B;
 }
 
 .btn-trending {
   background-color: var(--trending-brand) !important;
   color: var(--trending-dark) !important;
   font-weight: 600 !important;
+  border: none !important;
+}
+.btn-trending:hover {
+  background-color: var(--trending-brand-hover) !important;
+  color: var(--trending-dark) !important;
+}
+
+/* Trending Commercial Wizard Styles */
+.trending-wizard-container {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--trending-text);
+  margin-bottom: 25px;
+}
+
+.tc-card {
+  background: #ffffff;
+  border: 1px solid var(--trending-border);
+  border-radius: 12px;
+  padding: 22px 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tc-card:hover {
+  border-color: #cbd5e1;
+}
+
+.tc-section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.tc-step-badge {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: var(--trending-dark);
+  color: var(--trending-brand);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.tc-step-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.tc-step-subtitle {
+  font-size: 12px;
+  color: var(--trending-muted);
+  margin: 3px 0 0 0;
+}
+
+/* Form layout */
+.tc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .tc-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tc-col-span-2 {
+  grid-column: span 2 / span 2;
+}
+
+@media (max-width: 768px) {
+  .tc-col-span-2 {
+    grid-column: span 1 / span 1;
+  }
+}
+
+.tc-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.tc-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
+.tc-req {
+  color: #ef4444;
+}
+
+.tc-hint {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+.tc-input, .tc-select, .tc-textarea {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13.5px;
+  color: #1e293b;
+  background-color: #ffffff;
+  outline: none;
+  transition: all 0.15s ease-in-out;
+  box-sizing: border-box;
+}
+
+.tc-input:focus, .tc-select:focus, .tc-textarea:focus {
+  border-color: #84cc16;
+  box-shadow: 0 0 0 3px rgba(191, 247, 71, 0.25);
+}
+
+.tc-textarea {
+  min-height: 76px;
+  resize: vertical;
+}
+
+/* Multi-select tag pills */
+.tc-pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tc-pill-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: #334155;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s ease;
+  margin: 0;
+}
+
+.tc-pill-label:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.tc-pill-label input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  accent-color: #0f172a;
+  cursor: pointer;
+  margin: 0;
+}
+
+.tc-pill-label.active,
+.tc-pill-label:has(input:checked) {
+  border-color: #84cc16;
+  background-color: #f7fee7;
+  color: #14532d;
+  font-weight: 500;
+}
+
+/* Client badge */
+.tc-badge-client {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 12px;
+  color: #166534;
+}
+
+.tc-empty-state {
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  background: #f8fafc;
+  padding: 32px 16px;
+  text-align: center;
+  color: #64748b;
+  font-size: 13.5px;
 }
