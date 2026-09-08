@@ -1,5 +1,7 @@
 [
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-commercial_section",
     "dt": "Quotation",
     "fieldname": "commercial_section",
     "fieldtype": "Section Break",
@@ -7,6 +9,8 @@
     "insert_after": "customer_name"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-commercial_brief",
     "dt": "Quotation",
     "fieldname": "commercial_brief",
     "fieldtype": "Link",
@@ -15,6 +19,8 @@
     "insert_after": "commercial_section"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-costing_sheet",
     "dt": "Quotation",
     "fieldname": "costing_sheet",
     "fieldtype": "Link",
@@ -23,12 +29,16 @@
     "insert_after": "commercial_brief"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-col_break_comm_1",
     "dt": "Quotation",
     "fieldname": "col_break_comm_1",
     "fieldtype": "Column Break",
     "insert_after": "costing_sheet"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-approval_status",
     "dt": "Quotation",
     "fieldname": "approval_status",
     "fieldtype": "Select",
@@ -38,6 +48,8 @@
     "insert_after": "col_break_comm_1"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-approved_by_user",
     "dt": "Quotation",
     "fieldname": "approved_by_user",
     "fieldtype": "Link",
@@ -47,6 +59,8 @@
     "insert_after": "approval_status"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-event_details_section",
     "dt": "Quotation",
     "fieldname": "event_details_section",
     "fieldtype": "Section Break",
@@ -54,6 +68,8 @@
     "insert_after": "approved_by_user"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-location",
     "dt": "Quotation",
     "fieldname": "location",
     "fieldtype": "Data",
@@ -61,6 +77,8 @@
     "insert_after": "event_details_section"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-guest_count",
     "dt": "Quotation",
     "fieldname": "guest_count",
     "fieldtype": "Int",
@@ -68,12 +86,16 @@
     "insert_after": "location"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-col_break_event_dates",
     "dt": "Quotation",
     "fieldname": "col_break_event_dates",
     "fieldtype": "Column Break",
     "insert_after": "guest_count"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-setup_date",
     "dt": "Quotation",
     "fieldname": "setup_date",
     "fieldtype": "Date",
@@ -81,6 +103,8 @@
     "insert_after": "col_break_event_dates"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-event_start_date",
     "dt": "Quotation",
     "fieldname": "event_start_date",
     "fieldtype": "Date",
@@ -88,6 +112,8 @@
     "insert_after": "setup_date"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-event_end_date",
     "dt": "Quotation",
     "fieldname": "event_end_date",
     "fieldtype": "Date",
@@ -95,6 +121,8 @@
     "insert_after": "event_start_date"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-dismantle_date",
     "dt": "Quotation",
     "fieldname": "dismantle_date",
     "fieldtype": "Date",
@@ -102,6 +130,8 @@
     "insert_after": "event_end_date"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-agency_fee_section",
     "dt": "Quotation",
     "fieldname": "agency_fee_section",
     "fieldtype": "Section Break",
@@ -109,6 +139,8 @@
     "insert_after": "items"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-management_fee_pct",
     "dt": "Quotation",
     "fieldname": "management_fee_pct",
     "fieldtype": "Percent",
@@ -117,6 +149,8 @@
     "insert_after": "agency_fee_section"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-management_fee_amount",
     "dt": "Quotation",
     "fieldname": "management_fee_amount",
     "fieldtype": "Currency",
@@ -125,12 +159,16 @@
     "insert_after": "management_fee_pct"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-col_break_fee_summary",
     "dt": "Quotation",
     "fieldname": "col_break_fee_summary",
     "fieldtype": "Column Break",
     "insert_after": "management_fee_amount"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-net_total_before_vat",
     "dt": "Quotation",
     "fieldname": "net_total_before_vat",
     "fieldtype": "Currency",
@@ -139,6 +177,8 @@
     "insert_after": "col_break_fee_summary"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-vat_rate_applied",
     "dt": "Quotation",
     "fieldname": "vat_rate_applied",
     "fieldtype": "Percent",
@@ -147,6 +187,8 @@
     "insert_after": "net_total_before_vat"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-vat_amount",
     "dt": "Quotation",
     "fieldname": "vat_amount",
     "fieldtype": "Currency",
@@ -155,6 +197,8 @@
     "insert_after": "vat_rate_applied"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-milestones_section",
     "dt": "Quotation",
     "fieldname": "milestones_section",
     "fieldtype": "Section Break",
@@ -162,6 +206,8 @@
     "insert_after": "vat_amount"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Quotation-milestones",
     "dt": "Quotation",
     "fieldname": "milestones",
     "fieldtype": "Table",
@@ -170,6 +216,8 @@
     "insert_after": "milestones_section"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Sales Order-commercial_brief",
     "dt": "Sales Order",
     "fieldname": "commercial_brief",
     "fieldtype": "Link",
@@ -178,6 +226,8 @@
     "insert_after": "customer_name"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Sales Order-costing_sheet",
     "dt": "Sales Order",
     "fieldname": "costing_sheet",
     "fieldtype": "Link",
@@ -186,6 +236,8 @@
     "insert_after": "commercial_brief"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Sales Order-management_fee_pct",
     "dt": "Sales Order",
     "fieldname": "management_fee_pct",
     "fieldtype": "Percent",
@@ -193,6 +245,8 @@
     "insert_after": "items"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Sales Order-management_fee_amount",
     "dt": "Sales Order",
     "fieldname": "management_fee_amount",
     "fieldtype": "Currency",
@@ -200,6 +254,8 @@
     "insert_after": "management_fee_pct"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Sales Order-milestones",
     "dt": "Sales Order",
     "fieldname": "milestones",
     "fieldtype": "Table",
@@ -208,6 +264,8 @@
     "insert_after": "management_fee_amount"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Project-commercial_brief",
     "dt": "Project",
     "fieldname": "commercial_brief",
     "fieldtype": "Link",
@@ -216,6 +274,8 @@
     "insert_after": "customer"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Project-vertical",
     "dt": "Project",
     "fieldname": "vertical",
     "fieldtype": "Data",
@@ -223,6 +283,8 @@
     "insert_after": "commercial_brief"
   },
   {
+    "doctype": "Custom Field",
+    "name": "Project-deal_value",
     "dt": "Project",
     "fieldname": "deal_value",
     "fieldtype": "Currency",
