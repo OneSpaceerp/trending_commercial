@@ -8,24 +8,17 @@
   "track_changes": 1,
   "fields": [
     {
+      "fieldname": "section_break_company",
+      "fieldtype": "Section Break",
+      "label": "1. Company & Requester"
+    },
+    {
       "fieldname": "naming_series",
       "fieldtype": "Select",
       "label": "Series",
       "options": "BRIEF-.YYYY.-",
       "default": "BRIEF-.YYYY.-",
       "reqd": 1
-    },
-    {
-      "fieldname": "brief_interactive_html",
-      "fieldtype": "HTML",
-      "label": "Request Brief Wizard"
-    },
-    {
-      "fieldname": "title",
-      "fieldtype": "Data",
-      "label": "Request Title",
-      "reqd": 1,
-      "in_list_view": 1
     },
     {
       "fieldname": "customer",
@@ -36,17 +29,17 @@
       "in_list_view": 1
     },
     {
-      "fieldname": "contact_person",
-      "fieldtype": "Link",
-      "label": "Contact Person",
-      "options": "Contact"
-    },
-    {
       "fieldname": "company_name",
       "fieldtype": "Data",
       "label": "Client Name",
       "fetch_from": "customer.customer_name",
       "read_only": 1
+    },
+    {
+      "fieldname": "contact_person",
+      "fieldtype": "Link",
+      "label": "Contact Person / Requester",
+      "options": "Contact"
     },
     {
       "fieldname": "column_break_1",
@@ -61,23 +54,10 @@
       "in_list_view": 1
     },
     {
-      "fieldname": "priority",
-      "fieldtype": "Select",
-      "label": "Priority",
-      "options": "Low\nMedium\nHigh\nUrgent",
-      "default": "Medium",
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "deal_value",
-      "fieldtype": "Currency",
-      "label": "Deal Value (EGP)",
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "expected_date",
-      "fieldtype": "Date",
-      "label": "Expected Delivery Date"
+      "fieldname": "owner_user",
+      "fieldtype": "Link",
+      "label": "Account Manager",
+      "options": "User"
     },
     {
       "fieldname": "project",
@@ -88,15 +68,22 @@
       "in_list_view": 1
     },
     {
-      "fieldname": "section_break_vertical",
+      "fieldname": "section_break_request",
       "fieldtype": "Section Break",
-      "label": "Scope & Vertical Classification"
+      "label": "2. Request Details"
+    },
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "label": "Request Title",
+      "reqd": 1,
+      "in_list_view": 1
     },
     {
       "fieldname": "vertical",
       "fieldtype": "Select",
       "label": "Vertical",
-      "options": "EVENTS\nEMPLOYEE_EXPERIENCE\nBTL_ADVERTISING\nVENDORING_PRODUCTION",
+      "options": "\nEVENTS\nEMPLOYEE_EXPERIENCE\nBTL_ADVERTISING\nVENDORING_PRODUCTION",
       "reqd": 1,
       "in_list_view": 1
     },
@@ -104,9 +91,37 @@
       "fieldname": "sub_domain",
       "fieldtype": "Select",
       "label": "Sub-Domain",
-      "options": "sports\nentertainment\nbusiness\nlaunch\nindoor\nteam_building\noutings_travel\ncatering\nroad_shows\ntrade_marketing\nbooth_production\nbrand_activation\nbranding_production\ngiveaways\npayment_service",
+      "options": "",
       "reqd": 1,
       "in_list_view": 1
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "deal_value",
+      "fieldtype": "Currency",
+      "label": "Deal Value (EGP)",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "priority",
+      "fieldtype": "Select",
+      "label": "Priority",
+      "options": "Low\nMedium\nHigh\nUrgent",
+      "default": "Medium",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "expected_date",
+      "fieldtype": "Date",
+      "label": "Expected Delivery Date"
+    },
+    {
+      "fieldname": "section_break_notes",
+      "fieldtype": "Section Break",
+      "label": "Notes & Objectives"
     },
     {
       "fieldname": "description",
@@ -114,43 +129,21 @@
       "label": "General Description & Objectives"
     },
     {
-      "fieldname": "section_break_team",
-      "fieldtype": "Section Break",
-      "label": "Team & Operations Assignment"
-    },
-    {
-      "fieldname": "owner_user",
-      "fieldtype": "Link",
-      "label": "Account Manager (Owner)",
-      "options": "User"
-    },
-    {
-      "fieldname": "project_manager",
-      "fieldtype": "Link",
-      "label": "Assigned Project Manager",
-      "options": "User"
-    },
-    {
-      "fieldname": "assigned_at",
-      "fieldtype": "Datetime",
-      "label": "Assigned Timestamp",
-      "read_only": 1
-    },
-    {
       "fieldname": "section_break_questionnaire",
       "fieldtype": "Section Break",
-      "label": "Dynamic Brief Answers"
+      "label": "3. Brief Questionnaire"
+    },
+    {
+      "fieldname": "answers_html",
+      "fieldtype": "HTML",
+      "label": "Dynamic Brief Questions"
     },
     {
       "fieldname": "answers_json",
       "fieldtype": "Code",
       "label": "Answers (JSON Data)",
-      "options": "JSON"
-    },
-    {
-      "fieldname": "answers_html",
-      "fieldtype": "HTML",
-      "label": "Brief Overview"
+      "options": "JSON",
+      "hidden": 1
     }
   ],
   "permissions": [

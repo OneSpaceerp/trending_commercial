@@ -1,5 +1,8 @@
-// Trending Commercial Brief - Dynamic Wizard matching Trending CRM Request Form
+// Trending Commercial Brief - Standard ERPNext Form with Dynamic Sub-Domain Questionnaire
 frappe.ui.form.on("Commercial Brief", {
+	onload: function(frm) {
+		update_subdomain_options(frm);
+	},
 	refresh: function(frm) {
 		if (!frm.is_new()) {
 			frm.add_custom_button(__("Create Costing Sheet"), function() {
@@ -14,16 +17,15 @@ frappe.ui.form.on("Commercial Brief", {
 				}).addClass("btn-primary");
 			});
 		}
-		render_brief_wizard(frm);
+		update_subdomain_options(frm);
+		render_questionnaire_section(frm);
 	},
 	vertical: function(frm) {
-		render_brief_wizard(frm);
+		update_subdomain_options(frm, true);
+		render_questionnaire_section(frm);
 	},
 	sub_domain: function(frm) {
-		render_brief_wizard(frm);
-	},
-	customer: function(frm) {
-		render_brief_wizard(frm);
+		render_questionnaire_section(frm);
 	}
 });
 
@@ -1258,6 +1260,21 @@ const VERTICALS = [
   }
 ];
 
+function update_subdomain_options(frm, reset_subdomain = false) {
+	let v = frm.doc.vertical;
+	let vertObj = VERTICALS.find(item => item.key === v);
+	let subList = vertObj ? vertObj.subDomains : [];
+	
+	let options = [""];
+	subList.forEach(s => options.push(s.key));
+	frm.set_df_property("sub_domain", "options", options.join("\n"));
+
+	if (reset_subdomain && subList.length > 0) {
+		frm.set_value("sub_domain", subList[0].key);
+	}
+	frm.refresh_field("sub_domain");
+}
+
 function get_saved_answers(frm) {
 	try {
 		return frm.doc.answers_json ? JSON.parse(frm.doc.answers_json) : {};
@@ -1273,8 +1290,8 @@ function update_answer(frm, q_id, val) {
 	frm.set_value("answers_json", frm.doc.answers_json);
 }
 
-function render_brief_wizard(frm) {
-	const field = frm.get_field("brief_interactive_html");
+function render_questionnaire_section(frm) {
+	const field = frm.get_field("answers_html");
 	if (!field || !field.$wrapper) return;
 
 	const verticalKey = frm.doc.vertical || "";
@@ -1282,160 +1299,87 @@ function render_brief_wizard(frm) {
 	const currentVertical = VERTICALS.find(v => v.key === verticalKey);
 	const currentSub = currentVertical ? currentVertical.subDomains.find(s => s.key === subKey) : null;
 
-	let questions = [];
-	if (currentSub) {
-		questions = [...GENERAL_QUESTIONS, ...(currentVertical.shared || []), ...currentSub.questions];
+	if (!currentVertical || !currentSub) {
+		field.$wrapper.html(
+			'<div class="alert alert-light border text-muted py-4 text-center my-2">' +
+			'<i class="fa fa-info-circle me-1"></i> Please select a <b>Vertical</b> and <b>Sub-Domain</b> in <b>2. Request Details</b> above to load the dynamic brief questionnaire.' +
+			'</div>'
+		);
+		frm.set_df_property("section_break_questionnaire", "label", "3. Brief Questionnaire");
+		return;
 	}
 
-	const savedAnswers = get_saved_answers(frm);
+	// Update Section Header dynamically
+	frm.set_df_property("section_break_questionnaire", "label", "3. " + currentVertical.label + " · " + currentSub.label + " Brief");
 
-	let html = '<div class="trending-wizard-container">';
-	
-	// Step 1: Company & requester
-	html += '<div class="tc-card">';
-	html += '<div class="tc-section-header"><span class="tc-step-badge">1</span><div><h3 class="tc-step-title">Company & requester</h3><p class="tc-step-subtitle">Pick or review linked Client details</p></div></div>';
-	html += '<div class="tc-grid">';
-	html += '<div class="tc-field tc-col-span-2"><label class="tc-label">Company / Client <span class="tc-req">*</span></label>';
-	html += '<div class="tc-badge-client"><span>🏢 <b>' + (frm.doc.customer || 'Select Client in the form below') + '</b> ' + (frm.doc.company_name ? '· ' + frm.doc.company_name : '') + '</span></div>';
-	html += '</div>';
-	html += '<div class="tc-field"><label class="tc-label">Contact Person</label><div class="tc-input" style="background:#f8fafc; color:#475569;">' + (frm.doc.contact_person || '—') + '</div></div>';
-	html += '<div class="tc-field"><label class="tc-label">Status</label><div class="tc-input" style="background:#f8fafc; font-weight:600;">' + (frm.doc.status || 'New') + '</div></div>';
-	html += '</div></div>';
+	let questions = [...GENERAL_QUESTIONS, ...(currentVertical.shared || []), ...currentSub.questions];
+	let savedAnswers = get_saved_answers(frm);
 
-	// Step 2: Request details
-	html += '<div class="tc-card">';
-	html += '<div class="tc-section-header"><span class="tc-step-badge">2</span><div><h3 class="tc-step-title">Request details</h3><p class="tc-step-subtitle">Pick the vertical to load the right questions</p></div></div>';
-	html += '<div class="tc-grid">';
-	html += '<div class="tc-field tc-col-span-2"><label class="tc-label">Request title <span class="tc-req">*</span></label><input type="text" class="tc-input" id="tc_wiz_title" value="' + frappe.utils.escape_html(frm.doc.title || '') + '" placeholder="e.g. Vodafone Family Day" /></div>';
-	
-	html += '<div class="tc-field"><label class="tc-label">Vertical <span class="tc-req">*</span></label><select class="tc-select" id="tc_wiz_vertical">';
-	html += '<option value="">Select vertical…</option>';
-	VERTICALS.forEach(v => {
-		html += '<option value="' + v.key + '" ' + (v.key === verticalKey ? 'selected' : '') + '>' + v.label + '</option>';
-	});
-	html += '</select></div>';
+	let html = '<div class="brief-form-content pt-2">';
+	html += '<p class="text-muted small mb-3"><i class="fa fa-pencil-square-o me-1"></i> Only fill what this service needs — leave blank what does not apply.</p>';
+	html += '<div class="row">';
 
-	html += '<div class="tc-field"><label class="tc-label">Sub-domain <span class="tc-req">*</span></label><select class="tc-select" id="tc_wiz_subdomain" ' + (!currentVertical ? 'disabled' : '') + '>';
-	html += '<option value="">' + (currentVertical ? 'Select sub-domain…' : 'Pick a vertical first') + '</option>';
-	if (currentVertical) {
-		currentVertical.subDomains.forEach(s => {
-			html += '<option value="' + s.key + '" ' + (s.key === subKey ? 'selected' : '') + '>' + s.label + '</option>';
-		});
-	}
-	html += '</select></div>';
+	questions.forEach(q => {
+		const isWide = q.type === "long" || q.type === "multi";
+		const colClass = isWide ? "col-md-12" : "col-md-6";
+		const currentVal = savedAnswers[q.id];
 
-	html += '<div class="tc-field"><label class="tc-label">Deal value (EGP)</label><input type="number" class="tc-input" id="tc_wiz_deal_value" value="' + (frm.doc.deal_value || '') + '" placeholder="our expected revenue" /></div>';
-	
-	html += '<div class="tc-field"><label class="tc-label">Priority</label><select class="tc-select" id="tc_wiz_priority">';
-	['Low', 'Medium', 'High', 'Urgent'].forEach(p => {
-		html += '<option value="' + p + '" ' + (p === (frm.doc.priority || 'Medium') ? 'selected' : '') + '>' + p + '</option>';
-	});
-	html += '</select></div>';
+		let controlHtml = "";
+		if (q.type === "long") {
+			controlHtml = '<textarea class="form-control form-control-sm brief-input-val" rows="3" data-qid="' + q.id + '" placeholder="' + (q.hint || '') + '">' + frappe.utils.escape_html(currentVal || '') + '</textarea>';
+		} else if (q.type === "number") {
+			controlHtml = '<input type="number" class="form-control form-control-sm brief-input-val" data-qid="' + q.id + '" value="' + (currentVal || '') + '" placeholder="' + (q.hint || '') + '" />';
+		} else if (q.type === "date") {
+			controlHtml = '<input type="date" class="form-control form-control-sm brief-input-val" data-qid="' + q.id + '" value="' + (currentVal || '') + '" />';
+		} else if (q.type === "select") {
+			controlHtml = '<select class="form-control form-control-sm brief-input-val" data-qid="' + q.id + '"><option value="">Select…</option>';
+			(q.options || []).forEach(opt => {
+				controlHtml += '<option value="' + opt + '" ' + (opt === currentVal ? 'selected' : '') + '>' + opt + '</option>';
+			});
+			controlHtml += '</select>';
+		} else if (q.type === "yesno") {
+			controlHtml = '<select class="form-control form-control-sm brief-input-val" data-qid="' + q.id + '"><option value="">—</option><option value="Yes" ' + (currentVal === 'Yes' ? 'selected' : '') + '>Yes</option><option value="No" ' + (currentVal === 'No' ? 'selected' : '') + '>No</option></select>';
+		} else if (q.type === "multi") {
+			const selectedArr = Array.isArray(currentVal) ? currentVal : (currentVal ? [currentVal] : []);
+			controlHtml = '<div class="d-flex flex-wrap gap-3 pt-1 brief-checkbox-group" data-qid="' + q.id + '">';
+			(q.options || []).forEach((opt, idx) => {
+				const checked = selectedArr.includes(opt);
+				const chkId = 'chk_' + q.id + '_' + idx;
+				controlHtml += '<div class="form-check form-check-inline me-3 mb-1">';
+				controlHtml += '<input class="form-check-input" type="checkbox" id="' + chkId + '" value="' + frappe.utils.escape_html(opt) + '" ' + (checked ? 'checked' : '') + ' />';
+				controlHtml += '<label class="form-check-label small" for="' + chkId + '">' + opt + '</label>';
+				controlHtml += '</div>';
+			});
+			controlHtml += '</div>';
+		} else {
+			controlHtml = '<input type="text" class="form-control form-control-sm brief-input-val" data-qid="' + q.id + '" value="' + frappe.utils.escape_html(currentVal || '') + '" placeholder="' + (q.hint || '') + '" />';
+		}
 
-	html += '<div class="tc-field tc-col-span-2"><label class="tc-label">Expected delivery date</label><input type="date" class="tc-input" id="tc_wiz_expected_date" value="' + (frm.doc.expected_date || '') + '" /></div>';
-	html += '</div></div>';
-
-	// Step 3: Dynamic Brief Questions
-	if (currentSub) {
-		html += '<div class="tc-card">';
-		html += '<div class="tc-section-header"><span class="tc-step-badge">3</span><div><h3 class="tc-step-title">' + currentVertical.label + ' · ' + currentSub.label + ' brief</h3><p class="tc-step-subtitle">Only what this service needs — leave blank what does not apply</p></div></div>';
-		html += '<div class="tc-grid">';
-		questions.forEach(q => {
-			html += render_question_field(q, savedAnswers[q.id]);
-		});
+		html += '<div class="' + colClass + ' mb-3">';
+		html += '<div class="frappe-control form-group mb-0">';
+		html += '<label class="form-label small text-muted fw-bold mb-1">' + q.label + '</label>';
+		html += controlHtml;
+		if (q.hint && q.type !== 'long' && q.type !== 'number' && q.type !== 'text') {
+			html += '<div class="form-text small text-muted mt-1">' + q.hint + '</div>';
+		}
 		html += '</div></div>';
-	} else {
-		html += '<div class="tc-empty-state">Pick a vertical and sub-domain above to load the brief questions.</div>';
-	}
+	});
 
-	html += '</div>';
+	html += '</div></div>';
 
 	field.$wrapper.html(html);
-	bind_brief_wizard_events(frm);
-}
 
-function render_question_field(q, currentVal) {
-	const isWide = q.type === 'long' || q.type === 'multi';
-	const colClass = isWide ? 'tc-col-span-2' : '';
-	let controlHtml = '';
-
-	if (q.type === 'long') {
-		controlHtml = '<textarea class="tc-textarea tc-dyn-input" data-qid="' + q.id + '" placeholder="' + (q.hint || '') + '">' + frappe.utils.escape_html(currentVal || '') + '</textarea>';
-	} else if (q.type === 'number') {
-		controlHtml = '<input type="number" class="tc-input tc-dyn-input" data-qid="' + q.id + '" value="' + (currentVal || '') + '" placeholder="' + (q.hint || '') + '" />';
-	} else if (q.type === 'date') {
-		controlHtml = '<input type="date" class="tc-input tc-dyn-input" data-qid="' + q.id + '" value="' + (currentVal || '') + '" />';
-	} else if (q.type === 'select') {
-		controlHtml = '<select class="tc-select tc-dyn-input" data-qid="' + q.id + '"><option value="">Select…</option>';
-		(q.options || []).forEach(opt => {
-			controlHtml += '<option value="' + opt + '" ' + (opt === currentVal ? 'selected' : '') + '>' + opt + '</option>';
-		});
-		controlHtml += '</select>';
-	} else if (q.type === 'yesno') {
-		controlHtml = '<select class="tc-select tc-dyn-input" data-qid="' + q.id + '"><option value="">—</option><option value="Yes" ' + (currentVal === 'Yes' ? 'selected' : '') + '>Yes</option><option value="No" ' + (currentVal === 'No' ? 'selected' : '') + '>No</option></select>';
-	} else if (q.type === 'multi') {
-		const selectedArr = Array.isArray(currentVal) ? currentVal : (currentVal ? [currentVal] : []);
-		controlHtml = '<div class="tc-pill-group" data-qid="' + q.id + '">';
-		(q.options || []).forEach(opt => {
-			const checked = selectedArr.includes(opt);
-			controlHtml += '<label class="tc-pill-label ' + (checked ? 'active' : '') + '"><input type="checkbox" value="' + frappe.utils.escape_html(opt) + '" ' + (checked ? 'checked' : '') + ' /><span>' + opt + '</span></label>';
-		});
-		controlHtml += '</div>';
-	} else {
-		controlHtml = '<input type="text" class="tc-input tc-dyn-input" data-qid="' + q.id + '" value="' + frappe.utils.escape_html(currentVal || '') + '" placeholder="' + (q.hint || '') + '" />';
-	}
-
-	return '<div class="tc-field ' + colClass + '"><label class="tc-label">' + q.label + '</label>' + controlHtml + (q.hint && q.type !== 'long' && q.type !== 'number' && q.type !== 'text' ? '<span class="tc-hint">' + q.hint + '</span>' : '') + '</div>';
-}
-
-function bind_brief_wizard_events(frm) {
-	const $w = frm.get_field("brief_interactive_html").$wrapper;
-
-	$w.find("#tc_wiz_title").on("input", function() {
-		frm.set_value("title", $(this).val());
-	});
-
-	$w.find("#tc_wiz_vertical").on("change", function() {
-		const v = $(this).val();
-		frm.set_value("vertical", v);
-		const vertObj = VERTICALS.find(item => item.key === v);
-		if (vertObj && vertObj.subDomains.length > 0) {
-			frm.set_value("sub_domain", vertObj.subDomains[0].key);
-		} else {
-			frm.set_value("sub_domain", "");
-		}
-		render_brief_wizard(frm);
-	});
-
-	$w.find("#tc_wiz_subdomain").on("change", function() {
-		const s = $(this).val();
-		frm.set_value("sub_domain", s);
-		render_brief_wizard(frm);
-	});
-
-	$w.find("#tc_wiz_deal_value").on("input", function() {
-		frm.set_value("deal_value", $(this).val());
-	});
-
-	$w.find("#tc_wiz_priority").on("change", function() {
-		frm.set_value("priority", $(this).val());
-	});
-
-	$w.find("#tc_wiz_expected_date").on("change", function() {
-		frm.set_value("expected_date", $(this).val());
-	});
-
-	$w.find(".tc-dyn-input").on("change input", function() {
+	// Bind input listeners
+	field.$wrapper.find(".brief-input-val").on("change input", function() {
 		const qid = $(this).data("qid");
 		const val = $(this).val();
 		update_answer(frm, qid, val);
 	});
 
-	$w.find(".tc-pill-group").each(function() {
+	field.$wrapper.find(".brief-checkbox-group").each(function() {
 		const $group = $(this);
 		const qid = $group.data("qid");
 		$group.find('input[type="checkbox"]').on("change", function() {
-			$(this).closest(".tc-pill-label").toggleClass("active", this.checked);
 			const selected = [];
 			$group.find('input[type="checkbox"]:checked').each(function() {
 				selected.push($(this).val());
