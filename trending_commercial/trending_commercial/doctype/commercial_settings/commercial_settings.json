@@ -87,5 +87,18 @@
       "label": "Cancellation Policy",
       "default": "All payments made to Trending Experiential are non-refundable. This policy applies to all services, products, and bookings."
     }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "permlevel": 0
+    },
+    {
+      "role": "All",
+      "read": 1,
+      "permlevel": 0
+    }
   ]
 }

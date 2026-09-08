@@ -1,0 +1,106 @@
+{
+  "name": "Trending Commercial",
+  "label": "Trending Commercial",
+  "title": "Trending Commercial",
+  "module": "Trending Commercial",
+  "doctype": "Workspace",
+  "public": 1,
+  "is_hidden": 0,
+  "icon": "briefcase",
+  "indicator_color": "green",
+  "sequence_id": 1,
+  "roles": [
+    {
+      "role": "System Manager"
+    },
+    {
+      "role": "All"
+    }
+  ],
+  "shortcuts": [
+    {
+      "label": "Trending Hub",
+      "type": "Page",
+      "link_to": "trending-dashboard",
+      "color": "Green"
+    },
+    {
+      "label": "Commercial Briefs",
+      "type": "DocType",
+      "link_to": "Commercial Brief",
+      "color": "Blue"
+    },
+    {
+      "label": "Costing Sheets",
+      "type": "DocType",
+      "link_to": "Commercial Costing Sheet",
+      "color": "Orange"
+    },
+    {
+      "label": "Quotations",
+      "type": "DocType",
+      "link_to": "Quotation",
+      "color": "Cyan"
+    },
+    {
+      "label": "Sales Orders",
+      "type": "DocType",
+      "link_to": "Sales Order",
+      "color": "Purple"
+    },
+    {
+      "label": "Commercial Settings",
+      "type": "DocType",
+      "link_to": "Commercial Settings",
+      "color": "Grey"
+    }
+  ],
+  "links": [
+    {
+      "label": "Commercial Workflow",
+      "type": "Card Break",
+      "icon": "briefcase"
+    },
+    {
+      "label": "Commercial Brief",
+      "type": "Link",
+      "link_type": "DocType",
+      "link_to": "Commercial Brief",
+      "dependencies": ""
+    },
+    {
+      "label": "Commercial Costing Sheet",
+      "type": "Link",
+      "link_type": "DocType",
+      "link_to": "Commercial Costing Sheet",
+      "dependencies": ""
+    },
+    {
+      "label": "Quotation",
+      "type": "Link",
+      "link_type": "DocType",
+      "link_to": "Quotation",
+      "dependencies": ""
+    },
+    {
+      "label": "Commercial Settings & Governance",
+      "type": "Card Break",
+      "icon": "settings"
+    },
+    {
+      "label": "Commercial Settings",
+      "type": "Link",
+      "link_type": "DocType",
+      "link_to": "Commercial Settings",
+      "dependencies": ""
+    },
+    {
+      "label": "Commercial Approval Delegation",
+      "type": "Link",
+      "link_type": "DocType",
+      "link_to": "Commercial Approval Delegation",
+      "dependencies": ""
+    }
+  ],
+  "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Trending Commercial Operations\",\"level\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Trending Hub\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Commercial Briefs\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Costing Sheets\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Quotations\"}},{\"type\":\"card\",\"data\":{\"card_name\":\"Commercial Workflow\"}},{\"type\":\"card\",\"data\":{\"card_name\":\"Commercial Settings & Governance\"}}]"
+}
