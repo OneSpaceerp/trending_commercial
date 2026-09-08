@@ -1,0 +1,71 @@
+<div class="trending-hub-container">
+  <div class="trending-hub-header">
+    <div>
+      <h1 class="hub-title"><span id="hub-greeting">Good day</span>, <span id="hub-user-name">Team</span></h1>
+      <p class="hub-subtitle" id="hub-date-str">Here is what needs your commercial attention today</p>
+    </div>
+    <div class="hub-header-actions">
+      <button class="btn btn-primary btn-sm" id="btn-new-brief">
+        <i class="fa fa-plus"></i> New Brief
+      </button>
+    </div>
+  </div>
+
+  <!-- Stat Cards -->
+  <div class="hub-kpi-grid">
+    <div class="hub-card kpi-card">
+      <div class="kpi-label">Open Briefs / Pipeline</div>
+      <div class="kpi-val" id="val-open-briefs">0</div>
+      <div class="kpi-foot">Active commercial opportunities</div>
+    </div>
+    <div class="hub-card kpi-card">
+      <div class="kpi-label">Active Projects</div>
+      <div class="kpi-val" id="val-active-projects">0</div>
+      <div class="kpi-foot">In-execution customer projects</div>
+    </div>
+    <div class="hub-card kpi-card">
+      <div class="kpi-label">Pending Approvals</div>
+      <div class="kpi-val kpi-val-pending" id="val-pending-quotes">0</div>
+      <div class="kpi-foot">Awaiting director sign-off</div>
+    </div>
+    <div class="hub-card kpi-card">
+      <div class="kpi-label">Approved Quotations</div>
+      <div class="kpi-val kpi-val-approved" id="val-approved-quotes">0</div>
+      <div class="kpi-foot">Ready to deliver / convert</div>
+    </div>
+  </div>
+
+  <!-- Pipeline Distribution & Active Projects -->
+  <div class="hub-main-grid">
+    <div class="hub-card">
+      <div class="hub-card-header">
+        <h3>Active Execution Projects</h3>
+        <a href="/app/project" class="text-muted small">View all</a>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover table-sm">
+          <thead>
+            <tr>
+              <th>Project</th>
+              <th>Customer</th>
+              <th>Due Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="tbl-projects-body">
+            <tr><td colspan="4" class="text-center text-muted">Loading projects...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="hub-card">
+      <div class="hub-card-header">
+        <h3>Recent Commercial Activity</h3>
+      </div>
+      <div class="activity-feed" id="activity-feed-list">
+        <div class="text-muted small p-3">Loading timeline...</div>
+      </div>
+    </div>
+  </div>
+</div>

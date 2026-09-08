@@ -1,0 +1,110 @@
+{
+  "name": "Commercial Costing Sheet",
+  "module": "Trending Commercial",
+  "doctype": "DocType",
+  "is_submittable": 1,
+  "naming_rule": "By \"Naming Series\" field",
+  "autoname": "naming_series:",
+  "track_changes": 1,
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "COST-.YYYY.-",
+      "default": "COST-.YYYY.-",
+      "reqd": 1
+    },
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "label": "Costing Title",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "commercial_brief",
+      "fieldtype": "Link",
+      "label": "Commercial Brief",
+      "options": "Commercial Brief",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "project",
+      "fieldtype": "Link",
+      "label": "Project",
+      "options": "Project",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "customer",
+      "fieldtype": "Link",
+      "label": "Customer",
+      "options": "Customer",
+      "read_only": 1
+    },
+    {
+      "fieldname": "version",
+      "fieldtype": "Int",
+      "label": "Version",
+      "default": "1"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nSubmitted\nApproved\nRejected",
+      "default": "Draft",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_break_summary",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "total_cost",
+      "fieldtype": "Currency",
+      "label": "Total Direct Cost",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "total_selling",
+      "fieldtype": "Currency",
+      "label": "Total Selling Value",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "projected_margin_pct",
+      "fieldtype": "Percent",
+      "label": "Projected Gross Margin (%)",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "section_break_lines",
+      "fieldtype": "Section Break",
+      "label": "Itemized Operational Costing"
+    },
+    {
+      "fieldname": "items",
+      "fieldtype": "Table",
+      "label": "Costing Lines",
+      "options": "Commercial Costing Line",
+      "reqd": 1
+    },
+    {
+      "fieldname": "section_break_notes",
+      "fieldtype": "Section Break",
+      "label": "Notes & Internal Comments"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Operational Notes"
+    }
+  ]
+}

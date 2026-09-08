@@ -1,0 +1,151 @@
+{
+  "name": "Commercial Brief",
+  "module": "Trending Commercial",
+  "doctype": "DocType",
+  "is_submittable": 0,
+  "naming_rule": "By \"Naming Series\" field",
+  "autoname": "naming_series:",
+  "track_changes": 1,
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "BRIEF-.YYYY.-",
+      "default": "BRIEF-.YYYY.-",
+      "reqd": 1
+    },
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "label": "Request Title",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "customer",
+      "fieldtype": "Link",
+      "label": "Client / Company",
+      "options": "Customer",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "contact_person",
+      "fieldtype": "Link",
+      "label": "Contact Person",
+      "options": "Contact"
+    },
+    {
+      "fieldname": "company_name",
+      "fieldtype": "Data",
+      "label": "Client Name",
+      "fetch_from": "customer.customer_name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "New\nQualifying\nProposal\nWon\nLost\nOnHold",
+      "default": "New",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "priority",
+      "fieldtype": "Select",
+      "label": "Priority",
+      "options": "Low\nMedium\nHigh\nUrgent",
+      "default": "Medium",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "deal_value",
+      "fieldtype": "Currency",
+      "label": "Deal Value (EGP)",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "expected_date",
+      "fieldtype": "Date",
+      "label": "Expected Delivery Date"
+    },
+    {
+      "fieldname": "project",
+      "fieldtype": "Link",
+      "label": "Linked ERPNext Project",
+      "options": "Project",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "section_break_vertical",
+      "fieldtype": "Section Break",
+      "label": "Scope & Vertical Classification"
+    },
+    {
+      "fieldname": "vertical",
+      "fieldtype": "Select",
+      "label": "Vertical",
+      "options": "EVENTS\nEMPLOYEE_EXPERIENCE\nBTL_ADVERTISING\nVENDORING_PRODUCTION",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "sub_domain",
+      "fieldtype": "Select",
+      "label": "Sub-Domain",
+      "options": "sports\nentertainment\nbusiness\nlaunch\nindoor\nteam_building\noutings_travel\ncatering\nroad_shows\ntrade_marketing\nbooth_production\nbrand_activation\nbranding_production\ngiveaways\npayment_service",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Small Text",
+      "label": "General Description & Objectives"
+    },
+    {
+      "fieldname": "section_break_team",
+      "fieldtype": "Section Break",
+      "label": "Team & Operations Assignment"
+    },
+    {
+      "fieldname": "owner_user",
+      "fieldtype": "Link",
+      "label": "Account Manager (Owner)",
+      "options": "User"
+    },
+    {
+      "fieldname": "project_manager",
+      "fieldtype": "Link",
+      "label": "Assigned Project Manager",
+      "options": "User"
+    },
+    {
+      "fieldname": "assigned_at",
+      "fieldtype": "Datetime",
+      "label": "Assigned Timestamp",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_questionnaire",
+      "fieldtype": "Section Break",
+      "label": "Dynamic Brief Answers"
+    },
+    {
+      "fieldname": "answers_json",
+      "fieldtype": "Code",
+      "label": "Answers (JSON Data)",
+      "options": "JSON"
+    },
+    {
+      "fieldname": "answers_html",
+      "fieldtype": "HTML",
+      "label": "Brief Overview"
+    }
+  ]
+}

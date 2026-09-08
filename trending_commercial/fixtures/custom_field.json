@@ -1,0 +1,232 @@
+[
+  {
+    "dt": "Quotation",
+    "fieldname": "commercial_section",
+    "fieldtype": "Section Break",
+    "label": "Trending Commercial Specifications",
+    "insert_after": "customer_name"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "commercial_brief",
+    "fieldtype": "Link",
+    "options": "Commercial Brief",
+    "label": "Commercial Brief",
+    "insert_after": "commercial_section"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "costing_sheet",
+    "fieldtype": "Link",
+    "options": "Commercial Costing Sheet",
+    "label": "Costing Sheet Reference",
+    "insert_after": "commercial_brief"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "col_break_comm_1",
+    "fieldtype": "Column Break",
+    "insert_after": "costing_sheet"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "approval_status",
+    "fieldtype": "Select",
+    "options": "Draft\nPending Approval\nApproved\nRejected",
+    "default": "Draft",
+    "label": "Commercial Approval Status",
+    "insert_after": "col_break_comm_1"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "approved_by_user",
+    "fieldtype": "Link",
+    "options": "User",
+    "label": "Approved By",
+    "read_only": 1,
+    "insert_after": "approval_status"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "event_details_section",
+    "fieldtype": "Section Break",
+    "label": "Event & Project Metadata",
+    "insert_after": "approved_by_user"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "location",
+    "fieldtype": "Data",
+    "label": "Event / Activation Location",
+    "insert_after": "event_details_section"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "guest_count",
+    "fieldtype": "Int",
+    "label": "Guest Count / Headcount",
+    "insert_after": "location"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "col_break_event_dates",
+    "fieldtype": "Column Break",
+    "insert_after": "guest_count"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "setup_date",
+    "fieldtype": "Date",
+    "label": "Setup Date",
+    "insert_after": "col_break_event_dates"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "event_start_date",
+    "fieldtype": "Date",
+    "label": "Event Start Date",
+    "insert_after": "setup_date"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "event_end_date",
+    "fieldtype": "Date",
+    "label": "Event End Date",
+    "insert_after": "event_start_date"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "dismantle_date",
+    "fieldtype": "Date",
+    "label": "Dismantle Date",
+    "insert_after": "event_end_date"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "agency_fee_section",
+    "fieldtype": "Section Break",
+    "label": "Agency Fee & Commercial Calculation",
+    "insert_after": "items"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "management_fee_pct",
+    "fieldtype": "Percent",
+    "label": "Agency / Management Fee (%)",
+    "default": "15.0",
+    "insert_after": "agency_fee_section"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "management_fee_amount",
+    "fieldtype": "Currency",
+    "label": "Agency Fee Amount",
+    "read_only": 1,
+    "insert_after": "management_fee_pct"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "col_break_fee_summary",
+    "fieldtype": "Column Break",
+    "insert_after": "management_fee_amount"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "net_total_before_vat",
+    "fieldtype": "Currency",
+    "label": "Net Total (Items + Fee)",
+    "read_only": 1,
+    "insert_after": "col_break_fee_summary"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "vat_rate_applied",
+    "fieldtype": "Percent",
+    "label": "VAT Rate Applied (%)",
+    "default": "14.0",
+    "insert_after": "net_total_before_vat"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "vat_amount",
+    "fieldtype": "Currency",
+    "label": "Calculated VAT Amount",
+    "read_only": 1,
+    "insert_after": "vat_rate_applied"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "milestones_section",
+    "fieldtype": "Section Break",
+    "label": "Payment Milestones Schedule",
+    "insert_after": "vat_amount"
+  },
+  {
+    "dt": "Quotation",
+    "fieldname": "milestones",
+    "fieldtype": "Table",
+    "options": "Quote Payment Milestone",
+    "label": "Payment Milestones",
+    "insert_after": "milestones_section"
+  },
+  {
+    "dt": "Sales Order",
+    "fieldname": "commercial_brief",
+    "fieldtype": "Link",
+    "options": "Commercial Brief",
+    "label": "Commercial Brief",
+    "insert_after": "customer_name"
+  },
+  {
+    "dt": "Sales Order",
+    "fieldname": "costing_sheet",
+    "fieldtype": "Link",
+    "options": "Commercial Costing Sheet",
+    "label": "Costing Sheet Reference",
+    "insert_after": "commercial_brief"
+  },
+  {
+    "dt": "Sales Order",
+    "fieldname": "management_fee_pct",
+    "fieldtype": "Percent",
+    "label": "Agency Fee (%)",
+    "insert_after": "items"
+  },
+  {
+    "dt": "Sales Order",
+    "fieldname": "management_fee_amount",
+    "fieldtype": "Currency",
+    "label": "Agency Fee Amount",
+    "insert_after": "management_fee_pct"
+  },
+  {
+    "dt": "Sales Order",
+    "fieldname": "milestones",
+    "fieldtype": "Table",
+    "options": "Quote Payment Milestone",
+    "label": "Payment Milestones",
+    "insert_after": "management_fee_amount"
+  },
+  {
+    "dt": "Project",
+    "fieldname": "commercial_brief",
+    "fieldtype": "Link",
+    "options": "Commercial Brief",
+    "label": "Originating Commercial Brief",
+    "insert_after": "customer"
+  },
+  {
+    "dt": "Project",
+    "fieldname": "vertical",
+    "fieldtype": "Data",
+    "label": "Vertical",
+    "insert_after": "commercial_brief"
+  },
+  {
+    "dt": "Project",
+    "fieldname": "deal_value",
+    "fieldtype": "Currency",
+    "label": "Deal Value",
+    "insert_after": "vertical"
+  }
+]

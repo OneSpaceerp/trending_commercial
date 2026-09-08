@@ -1,0 +1,10 @@
+:root {
+  --trending-brand: #BFF747;
+  --trending-dark: #0F172A;
+}
+
+.btn-trending {
+  background-color: var(--trending-brand) !important;
+  color: var(--trending-dark) !important;
+  font-weight: 600 !important;
+}

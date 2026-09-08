@@ -1,0 +1,79 @@
+{
+  "name": "Commercial Costing Line",
+  "module": "Trending Commercial",
+  "doctype": "DocType",
+  "istable": 1,
+  "editable_grid": 1,
+  "track_changes": 0,
+  "fields": [
+    {
+      "fieldname": "category",
+      "fieldtype": "Select",
+      "label": "Cost Category",
+      "options": "Venue\nProduction\nCatering\nTransport\nPermits\nTalent\nGiveaways\nTechnical AV\nOther",
+      "default": "Production",
+      "in_list_view": 1,
+      "reqd": 1
+    },
+    {
+      "fieldname": "item_label",
+      "fieldtype": "Data",
+      "label": "Item Label / Title",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Small Text",
+      "label": "Description / Specifications"
+    },
+    {
+      "fieldname": "quantity",
+      "fieldtype": "Float",
+      "label": "Quantity",
+      "default": "1.0",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "unit_cost",
+      "fieldtype": "Currency",
+      "label": "Unit Cost Rate",
+      "default": "0.0",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "cost_total",
+      "fieldtype": "Currency",
+      "label": "Total Cost",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "margin_pct",
+      "fieldtype": "Percent",
+      "label": "Markup / Margin (%)",
+      "default": "25.0",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "selling_rate",
+      "fieldtype": "Currency",
+      "label": "Calculated Selling Rate",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "selling_total",
+      "fieldtype": "Currency",
+      "label": "Total Selling Price",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "supplier_reference",
+      "fieldtype": "Data",
+      "label": "Internal Supplier Reference"
+    }
+  ]
+}

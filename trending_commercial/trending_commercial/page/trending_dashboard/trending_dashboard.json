@@ -1,0 +1,8 @@
+{
+  "name": "trending_dashboard",
+  "module": "Trending Commercial",
+  "doctype": "Page",
+  "page_name": "trending-dashboard",
+  "title": "Trending Hub",
+  "standard": "Yes"
+}

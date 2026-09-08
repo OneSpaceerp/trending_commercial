@@ -1,0 +1,105 @@
+.trending-hub-container {
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #1F2937;
+}
+
+.trending-hub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.hub-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  color: #111827;
+}
+
+.hub-subtitle {
+  color: #6B7280;
+  font-size: 13px;
+  margin: 4px 0 0 0;
+}
+
+.hub-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.hub-card {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.kpi-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.kpi-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #6B7280;
+}
+
+.kpi-val {
+  font-size: 32px;
+  font-weight: 800;
+  color: #111827;
+  margin: 8px 0;
+}
+
+.kpi-val-pending {
+  color: #D97706;
+}
+
+.kpi-val-approved {
+  color: #059669;
+}
+
+.kpi-foot {
+  font-size: 11px;
+  color: #9CA3AF;
+}
+
+.hub-main-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.hub-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #F3F4F6;
+  padding-bottom: 10px;
+}
+
+.hub-card-header h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.activity-feed-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #F3F4F6;
+  font-size: 12px;
+}
+
+.activity-time {
+  color: #9CA3AF;
+  font-size: 11px;
+}

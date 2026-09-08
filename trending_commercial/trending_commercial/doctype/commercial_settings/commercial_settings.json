@@ -1,0 +1,91 @@
+{
+  "name": "Commercial Settings",
+  "module": "Trending Commercial",
+  "doctype": "DocType",
+  "issingle": 1,
+  "track_changes": 1,
+  "fields": [
+    {
+      "fieldname": "section_pricing",
+      "fieldtype": "Section Break",
+      "label": "Default Pricing & Commercial Parameters"
+    },
+    {
+      "fieldname": "default_management_fee_pct",
+      "fieldtype": "Percent",
+      "label": "Default Management Fee (%)",
+      "default": "15.0",
+      "reqd": 1
+    },
+    {
+      "fieldname": "default_vat_rate_pct",
+      "fieldtype": "Percent",
+      "label": "Default VAT Rate (%)",
+      "default": "14.0",
+      "reqd": 1
+    },
+    {
+      "fieldname": "section_approvals",
+      "fieldtype": "Section Break",
+      "label": "Approval Authority Thresholds (EGP Grand Total)"
+    },
+    {
+      "fieldname": "tier_1_limit",
+      "fieldtype": "Currency",
+      "label": "Tier 1 Limit (Account Manager Self-Sign)",
+      "default": "10000.0"
+    },
+    {
+      "fieldname": "tier_2_limit",
+      "fieldtype": "Currency",
+      "label": "Tier 2 Limit (Sales Manager / Lead)",
+      "default": "50000.0"
+    },
+    {
+      "fieldname": "tier_3_limit",
+      "fieldtype": "Currency",
+      "label": "Tier 3 Limit (Commercial Director)",
+      "default": "1000000.0"
+    },
+    {
+      "fieldname": "section_bank",
+      "fieldtype": "Section Break",
+      "label": "Bank & Corporate Presentation Details"
+    },
+    {
+      "fieldname": "bank_name",
+      "fieldtype": "Data",
+      "label": "Bank Name",
+      "default": "CIB Bank"
+    },
+    {
+      "fieldname": "beneficiary_name",
+      "fieldtype": "Data",
+      "label": "Beneficiary Name",
+      "default": "Trending Experiential"
+    },
+    {
+      "fieldname": "iban",
+      "fieldtype": "Data",
+      "label": "IBAN",
+      "default": "EG390500006820173946500 1"
+    },
+    {
+      "fieldname": "section_terms",
+      "fieldtype": "Section Break",
+      "label": "Default Legal Terms & Conditions"
+    },
+    {
+      "fieldname": "default_scope_terms",
+      "fieldtype": "Small Text",
+      "label": "Scope & Validity Terms",
+      "default": "All prices in this quotation are rental-based unless stated otherwise. This quotation is a full package and cannot be delivered in parts. Valid until the date stated above."
+    },
+    {
+      "fieldname": "default_cancellation_terms",
+      "fieldtype": "Small Text",
+      "label": "Cancellation Policy",
+      "default": "All payments made to Trending Experiential are non-refundable. This policy applies to all services, products, and bookings."
+    }
+  ]
+}

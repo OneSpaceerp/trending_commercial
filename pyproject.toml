@@ -1,0 +1,26 @@
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "trending_commercial"
+authors = [
+    { name = "Trending Experiential", email = "tech@trending-mena.com"}
+]
+description = "ERPNext v16 Commercial Operations, Costing, Dynamic Briefs, and Quotation Management"
+requires-python = ">=3.14"
+readme = "README.md"
+dynamic = ["version"]
+dependencies = []
+
+[tool.bench.frappe-dependencies]
+frappe = ">=16.0.0,<17.0.0"
+erpnext = ">=16.0.0,<17.0.0"
+
+[tool.ruff]
+line-length = 110
+indent-width = 4
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "tab"
