@@ -21,8 +21,7 @@ doctype_js = {
 # ---------------
 doc_events = {
 	"Quotation": {
-		"validate": "trending_commercial.trending_commercial.api.quotation.calculate_quotation_commercial_totals",
-		"before_print": "trending_commercial.trending_commercial.api.quotation.quotation_before_print"
+		"validate": "trending_commercial.trending_commercial.api.quotation.calculate_quotation_commercial_totals"
 	}
 }
 
