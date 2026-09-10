@@ -72,7 +72,7 @@ def create_quotation_from_costing(costing_sheet_name):
 	quotation.insert(ignore_permissions=True)
 	return quotation.name
 
-def calculate_quotation_commercial_totals(doc):
+def calculate_quotation_commercial_totals(doc, method=None, *args, **kwargs):
 	"""Exact mathematical model from Trending CRM lib/quote.ts:
 	Subtotal = Sum(Qty * Rate)
 	Management Fee = Subtotal * fee_pct
@@ -134,9 +134,9 @@ def approve_quotation(quotation_name):
 	doc.save(ignore_permissions=True)
 	return {"status": "Approved", "message": _("Quotation has been successfully approved.")}
 
-def quotation_before_print(doc, print_format=None):
+def quotation_before_print(doc, method=None, *args, **kwargs):
 	"""Server-side PDF and print restriction enforced."""
 	if doc.doctype == "Quotation" and getattr(doc, "approval_status", "Draft") != "Approved":
-		# If user is not admin, throw security block or add watermark flag
+		# Allow System Manager or Administrator to preview / print draft with watermark
 		if "System Manager" not in frappe.get_roles():
 			frappe.throw(_("Printing is disabled: This quotation is {0} and has not received final approval.").format(doc.approval_status))
