@@ -48,12 +48,23 @@ function is_vat_tax_row(t) {
 	return head.includes("2311") || head.includes("VAT") || desc.includes("VAT");
 }
 
+function set_field_value_safe(frm, fieldname, value) {
+	if (frm.fields_dict && frm.fields_dict[fieldname]) {
+		frm.set_value(fieldname, value);
+	} else {
+		frm.doc[fieldname] = value;
+	}
+}
+
 function sync_commercial_rows_if_needed(frm) {
-	if (frm.doc.docstatus === 0 && (frm.doc.management_fee_pct || frm.doc.vat_rate_applied)) {
-		let has_fee = (frm.doc.items || []).some(it => is_management_fee_item(it));
-		let has_vat = (frm.doc.taxes || []).some(t => is_vat_tax_row(t));
-		if (!has_fee || !has_vat || flt(frm.doc.management_fee_amount) === 0) {
-			recalc_commercial_quotation(frm);
+	if (frm.doc.docstatus === 0 && (frm.doc.items || []).length > 0) {
+		let operational_items = (frm.doc.items || []).filter(it => !is_management_fee_item(it));
+		if (operational_items.length > 0) {
+			let has_fee = (frm.doc.items || []).some(it => is_management_fee_item(it));
+			let has_vat = (frm.doc.taxes || []).some(t => is_vat_tax_row(t));
+			if (!has_fee || !has_vat || flt(frm.doc.management_fee_amount) === 0) {
+				recalc_commercial_quotation(frm);
+			}
 		}
 	}
 }
@@ -63,7 +74,7 @@ function recalc_commercial_quotation(frm) {
 	frm._recalculating_commercial = true;
 
 	try {
-		// 1. Calculate operational subtotal
+		// 1. Calculate operational subtotal (excluding fee row)
 		let base_subtotal = 0;
 		(frm.doc.items || []).forEach(it => {
 			if (!is_management_fee_item(it)) {
@@ -79,7 +90,7 @@ function recalc_commercial_quotation(frm) {
 
 		// 2. Synchronize Agency / Management Fee line item
 		let fee_row = (frm.doc.items || []).find(it => is_management_fee_item(it));
-		if (fee_pct > 0) {
+		if (fee_pct > 0 && base_subtotal > 0) {
 			if (!fee_row) {
 				fee_row = frm.add_child("items");
 			}
@@ -104,7 +115,7 @@ function recalc_commercial_quotation(frm) {
 		// 3. Synchronize VAT Tax Row in Taxes table under account [2311 - VAT - T]
 		let vat_pct = flt(frm.doc.vat_rate_applied || 0);
 		let vat_row = (frm.doc.taxes || []).find(t => is_vat_tax_row(t));
-		if (vat_pct > 0) {
+		if (vat_pct > 0 && base_subtotal > 0) {
 			if (!vat_row) {
 				vat_row = frm.add_child("taxes");
 			}
@@ -112,7 +123,7 @@ function recalc_commercial_quotation(frm) {
 			vat_row.account_head = "2311 - VAT - T";
 			vat_row.rate = vat_pct;
 			vat_row.description = "VAT " + vat_pct + "%";
-		} else if (vat_row) {
+		} else if (vat_row && base_subtotal <= 0) {
 			let idx = (frm.doc.taxes || []).findIndex(t => is_vat_tax_row(t));
 			if (idx !== -1) {
 				frm.doc.taxes.splice(idx, 1);
@@ -120,20 +131,19 @@ function recalc_commercial_quotation(frm) {
 		}
 		frm.refresh_field("taxes");
 
-		// 4. Update calculated summary fields
+		// 4. Update calculated summary fields safely
 		let net_total = flt(base_subtotal + fee_amt, 2);
 		let vat_amt = flt(net_total * (vat_pct / 100.0), 2);
 		let grand_total = flt(net_total + vat_amt, 2);
 
-		frm.set_value("items_subtotal", base_subtotal);
-		frm.set_value("management_fee_amount", fee_amt);
-		frm.set_value("net_total_before_vat", net_total);
-		frm.set_value("vat_amount", vat_amt);
-		frm.set_value("total", net_total);
-		frm.set_value("net_total", net_total);
-		frm.set_value("total_taxes_and_charges", vat_amt);
-		frm.set_value("grand_total", grand_total);
-		frm.set_value("rounded_total", grand_total);
+		frm.doc.items_subtotal = base_subtotal;
+		frm.doc.management_fee_amount = fee_amt;
+		frm.doc.net_total_before_vat = net_total;
+		frm.doc.vat_amount = vat_amt;
+
+		set_field_value_safe(frm, "management_fee_amount", fee_amt);
+		set_field_value_safe(frm, "net_total_before_vat", net_total);
+		set_field_value_safe(frm, "vat_amount", vat_amt);
 
 		// 5. Update milestone amounts
 		(frm.doc.milestones || []).forEach(m => {
@@ -143,7 +153,11 @@ function recalc_commercial_quotation(frm) {
 
 		// 6. Invoke standard ERPNext tax calculation engine if present
 		if (frm.cscript && typeof frm.cscript.calculate_taxes_and_totals === "function") {
-			frm.cscript.calculate_taxes_and_totals();
+			try {
+				frm.cscript.calculate_taxes_and_totals();
+			} catch (e) {
+				console.warn("ERPNext calculate_taxes_and_totals:", e);
+			}
 		}
 	} finally {
 		frm._recalculating_commercial = false;
