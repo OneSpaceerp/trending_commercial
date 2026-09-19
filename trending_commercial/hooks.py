@@ -33,3 +33,8 @@ fixtures = [
 		"filters": [["dt", "in", ["Quotation", "Sales Order", "Project", "Sales Invoice"]]]
 	}
 ]
+
+# Migration hooks
+# ---------------
+after_migrate = "trending_commercial.trending_commercial.api.quotation.setup_commercial_defaults"
+

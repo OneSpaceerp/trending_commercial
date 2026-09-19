@@ -209,7 +209,7 @@
     <table class="totals-table">
       <tr>
         <td style="color: #4B5563;">Items Subtotal:</td>
-        <td style="text-align: right; font-weight: 600;">{{ frappe.utils.fmt_money(doc.items_subtotal or doc.total, currency=doc.currency) }}</td>
+        <td style="text-align: right; font-weight: 600;">{{ frappe.utils.fmt_money(doc.items_subtotal or (doc.net_total_before_vat - (doc.management_fee_amount or 0)), currency=doc.currency) }}</td>
       </tr>
       {% if doc.management_fee_amount %}
       <tr>
@@ -219,7 +219,7 @@
       {% endif %}
       <tr>
         <td style="color: #4B5563;">Net Total (Before VAT):</td>
-        <td style="text-align: right; font-weight: 600;">{{ frappe.utils.fmt_money(doc.net_total_before_vat or (doc.items_subtotal + (doc.management_fee_amount or 0)), currency=doc.currency) }}</td>
+        <td style="text-align: right; font-weight: 600;">{{ frappe.utils.fmt_money(doc.net_total_before_vat or doc.net_total, currency=doc.currency) }}</td>
       </tr>
       <tr>
         <td style="color: #4B5563;">VAT ({{ doc.vat_rate_applied or 14 }}%):</td>
