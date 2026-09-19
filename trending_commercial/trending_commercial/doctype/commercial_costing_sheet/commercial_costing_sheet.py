@@ -3,6 +3,8 @@ from frappe.model.document import Document
 
 class CommercialCostingSheet(Document):
 	def validate(self):
+		if self.docstatus == 1 and not self.get("items"):
+			frappe.throw(frappe._("Please add at least one costing line before submitting."))
 		self.calculate_totals()
 		self.sync_brief_data()
 

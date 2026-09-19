@@ -37,7 +37,16 @@ def create_costing_from_brief(brief_name):
 		"customer": brief.customer,
 		"project": brief.project,
 		"status": "Draft",
-		"items": []
+		"items": [
+			{
+				"category": "Production",
+				"item_label": brief.title or "Operational Costing Line",
+				"description": f"Costing line for {brief.title}",
+				"quantity": 1.0,
+				"unit_cost": 0.0,
+				"margin_pct": 25.0
+			}
+		]
 	})
-	costing.insert()
+	costing.insert(ignore_permissions=True, ignore_mandatory=True)
 	return costing.name

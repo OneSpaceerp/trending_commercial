@@ -14,8 +14,8 @@ frappe.ui.form.on("Commercial Brief", {
 							frappe.set_route("Form", "Commercial Costing Sheet", r.message);
 						}
 					}
-				}).addClass("btn-primary");
-			});
+				});
+			}).addClass("btn-primary");
 		}
 		update_subdomain_options(frm);
 		render_questionnaire_section(frm);

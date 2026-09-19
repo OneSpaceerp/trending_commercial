@@ -93,8 +93,7 @@
       "fieldname": "items",
       "fieldtype": "Table",
       "label": "Costing Lines",
-      "options": "Commercial Costing Line",
-      "reqd": 1
+      "options": "Commercial Costing Line"
     },
     {
       "fieldname": "section_break_notes",
